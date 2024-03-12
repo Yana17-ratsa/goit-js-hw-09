@@ -5,13 +5,41 @@
 
 
 const form = document.querySelector(".feedback-form");
+const emailValue = form.elements.email;
+const messageValue = form.elements.message;  
+let info = { email: '', message: '', };
+
+
+//Перший пункт
 form.addEventListener("input", handleInput);
 
-function handleInput(event) {
+function handleInput(e) {
+    e.preventDefault();
+    const email = e.currentTarget.elements.email.value.trim();
+    const message = e.currentTarget.elements.message.value.trim();
+    info.email = email;
+    info.message = message;
 
-    const info = {
-        email: emailElem,
-        message: messageElem,
-    }
+    localStorage.setItem("feedback-form-state", JSON.stringify(info));
+}
 
+
+//Другий пункт
+const parsedInfo = JSON.parse(localStorage.getItem("feedback-form-state"));
+
+if (parsedInfo !== null) {
+    emailValue.value = parsedInfo.email;
+    messageValue.value = parsedInfo.message;
+    info = parsedInfo;
+}
+
+//Третій пункт
+form.addEventListener("submit", submitHandle);
+
+function submitHandle(event) { 
+    event.preventDefault();
+    console.log(info);
+    localStorage.clear();
+    info.email = '';
+    info.message = '';
 }
