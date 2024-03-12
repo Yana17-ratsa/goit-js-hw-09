@@ -1,8 +1,10 @@
-const form = document.querySelector(".feedback-form");
-const emailElem = form.elements.email.value;
-const messageElem = form.elements.message.value;
+// Використовуючи делегуваня, відстежуй на формі подію input і щоразу записуй у локальне сховище об'єкт з полями email і message, у яких зберігай поточні значення полів форми. Нехай ключем для сховища буде рядок "feedback-form-state".
+// Під час завантаження сторінки перевіряй стан сховища, і якщо там є збережені дані, то заповнюй ними поля форми. В іншому випадку поля повинні бути порожніми.
+// Під час сабміту форми очищай сховище і поля форми, а також виводь у консоль об'єкт з полями email, message та їхніми поточними значеннями.
 
-console.log(messageElem);
+
+
+const form = document.querySelector(".feedback-form");
 form.addEventListener("input", handleInput);
 
 function handleInput(event) {
@@ -11,10 +13,5 @@ function handleInput(event) {
         email: emailElem,
         message: messageElem,
     }
-    
-    
-
-    // localStorage.setItem("feedback-form-state", JSON.stringify(info));
-
 
 }
