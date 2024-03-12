@@ -14,7 +14,6 @@ let info = { email: '', message: '', };
 form.addEventListener("input", handleInput);
 
 function handleInput(e) {
-    e.preventDefault();
     const email = e.currentTarget.elements.email.value.trim();
     const message = e.currentTarget.elements.message.value.trim();
     info.email = email;
@@ -38,8 +37,11 @@ form.addEventListener("submit", submitHandle);
 
 function submitHandle(event) { 
     event.preventDefault();
+    if (emailValue.value === "" || messageValue.value === "") {
+        alert("Потрібно заповнити всі поля!");
+    } else {
     console.log(info);
     localStorage.clear();
-    info.email = '';
-    info.message = '';
+    form.reset();
+    }
 }
